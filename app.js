@@ -48,6 +48,14 @@ class TicTacToe {
                 this.squares.push(new Square(x * w, y * h, w, h, this.ctx));
             }
         }
+
+        // Create the actors.
+        this.actors = ["X", "O"];
+
+        // Define the current actors.
+        this.turn = 0;
+
+        // Defines
     }
 
     // THe click method is called whenever the canvcas is clicked.
