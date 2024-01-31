@@ -19,6 +19,12 @@ class Square{
         this.ctx.ctx.strokestyle = 'black';
         this.ctx.strokeRect(this.x, this.y, this.width, this.height);
 
-        // Draw the actor
+        // Draw the actor if it is not null.
+        if (this.actor) {
+            this.ctx.fillStyles = 'black';
+            this.ctx.font = '30px Arial';
+            this.ctx.textAlign = "center";
+            this.ctx.fillText(this.actor, this.x + this.width / 2, this.y + this.height / 2 + 10);
+        }
     }
 }
