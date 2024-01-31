@@ -28,3 +28,8 @@ class Square{
         }
     }
 }
+
+// The TIcTacToe class defines the actual game.
+class TicTacToe {
+    
+}
