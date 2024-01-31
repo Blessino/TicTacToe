@@ -35,7 +35,19 @@ class TicTacToe {
         this.canvas = document.getElementById(id);
         this.ctx = this.canvas.getContext('2d');
 
-        // Create an empty array to stre
+        // Create an empty array to store the squares.
+        this.squares = [];
+
+        // Get square width and height.
+        const w = this.canvas.width / 3;
+        const h = this.canvas.height / 3;
+
+        // Create 3x3 squares.
+        for (let x = 0; x < 3; x++) {
+            for (let y = 0; y < 3; y++) {
+                this.squares.push(new Square(x * w, y * h, w, h, this.ctx));
+            }
+        }
     }
 
     // THe click method is called whenever the canvcas is clicked.
