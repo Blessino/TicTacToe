@@ -31,5 +31,26 @@ class Square{
 
 // The TIcTacToe class defines the actual game.
 class TicTacToe {
-    
+    constructor(id) {
+        this.canvas = document.getElementById(id);
+        this.ctx = this.canvas.getContext('2d');
+
+        // Create an empty array to stre
+    }
+
+    // THe click method is called whenever the canvcas is clicked.
+    // The method is used to check if the mouse clicked within one of the empty squares.
+    click(event) {
+
+    }
+
+    // The checkFoeWinner method ends the game if there is a winner or it's a draw.
+    checkForWinner() {
+
+    }
+
+    // The reset method restarts the game.
+    reset() {
+
+    }
 }
