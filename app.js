@@ -55,7 +55,15 @@ class TicTacToe {
         // Define the current actors.
         this.turn = 0;
 
-        // Defines
+        // Defines a check to see if the game is over.
+        this.gameOver = false;
+
+        // Draw the board.
+        this.squares.forEach(squares => squares.draw());
+
+        // Bind the click event.
+        this.canvas.addEventListener('click', function(event) {this.click(event); }.bind(this));
+
     }
 
     // THe click method is called whenever the canvcas is clicked.
