@@ -15,6 +15,10 @@ class Square{
 
     // The draw method is used to draw the square.
     draw() {
-        //
+        // Draw the ract.
+        this.ctx.ctx.strokestyle = 'black';
+        this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+
+        // Draw the actor
     }
 }
