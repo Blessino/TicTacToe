@@ -3,7 +3,7 @@
 // A square represents a square on the board.
 // It contains position, size information and,
 // optionally, an actor that should be drawn on it.
-class Square{
+class Square {
     constructor(x, y, width, height, ctx) {
         this.x = x;
         this.y = y;
@@ -16,12 +16,12 @@ class Square{
     // The draw method is used to draw the square.
     draw() {
         // Draw the ract.
-        this.ctx.ctx.strokestyle = 'black';
+        this.ctx.strokeStyle = 'black';
         this.ctx.strokeRect(this.x, this.y, this.width, this.height);
 
         // Draw the actor if it is not null.
         if (this.actor) {
-            this.ctx.fillStyles = 'black';
+            this.ctx.fillStyle = 'black';
             this.ctx.font = '30px Arial';
             this.ctx.textAlign = "center";
             this.ctx.fillText(this.actor, this.x + this.width / 2, this.y + this.height / 2 + 10);
@@ -32,6 +32,7 @@ class Square{
 // The TIcTacToe class defines the actual game.
 class TicTacToe {
     constructor(id) {
+        // Get canvas and context.
         this.canvas = document.getElementById(id);
         this.ctx = this.canvas.getContext('2d');
 
@@ -84,7 +85,7 @@ class TicTacToe {
             // Only allow empty squares to be clicked.
             if (square.actor != null) continue;
             // Check if the mouse is inside the squares.
-            if (x >= this.squares.x && x <= square.x + square.width && y >= square.y && y <= square.y + square.height) {
+            if (x >= square.x && x <= square.x + square.width && y >= square.y && y <= square.y + square.height) {
                 // Set actor
                 square.actor = this.actors[this.turn];
                 square.draw();
@@ -93,6 +94,9 @@ class TicTacToe {
                 this.turn = (this.turn + 1) % this.actors.length;
             }
         }
+
+        // Check if the game should end.
+        this.checkForWinner();
     }
 
     // The checkFoeWinner method ends the game if there is a winner or it's a draw.
@@ -131,9 +135,9 @@ class TicTacToe {
                     this.ctx.stroke();
 
                     // Draw winner text.
-                    this.ctx.fillStyles = 'red';
+                    this.ctx.fillStyle = 'red';
                     this.ctx.font = '30px Arial';
-                    this.textAlign = "center";
+                    this.ctx.textAlign = "center";
                     this.ctx.fillText(s1.actor + " wins!", this.canvas.width / 2, this.canvas.height / 2);
                 }
             }
@@ -142,7 +146,7 @@ class TicTacToe {
         // Check if the game is draw.
         if (!this.gameOver && this.squares.filter(square => square.actor == null).length == 0) {
             this.gameOver = true;
-            this.ctx.fillStyles = 'red';
+            this.ctx.fillStyle = 'red';
             this.ctx.font = '30px Arial';
             this.ctx.textAlign = "center";
             this.ctx.fillText("Draw!", this.canvas.width / 2, this.canvas.height / 2);
@@ -156,7 +160,7 @@ class TicTacToe {
         // Reset all actors.
         this.squares.forEach(squares => squares.actor = null);
         // Draw the boared.
-        this.squares.forEach(square => this.squares.draw());
+        this.squares.forEach(squares => squares.draw());
         // Reset turn.
         this.turn = 0;
         // reset game over.
