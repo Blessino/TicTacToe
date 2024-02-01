@@ -97,7 +97,18 @@ class TicTacToe {
 
     // The checkFoeWinner method ends the game if there is a winner or it's a draw.
     checkForWinner() {
+        // Check if the game is over.
+        const winnerCombinations = [
+            // Columns
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            // Rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            // Diagonals
+            [0, 4, 8], [2, 4, 6]
+        ];
 
+        // Check combinations
+        for (let i = 0; i < winnerCombinations.length; i++)
     }
 
     // The reset method restarts the game.
