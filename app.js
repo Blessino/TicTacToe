@@ -117,8 +117,35 @@ class TicTacToe {
             let s2 = this.squares[combination[1]];
             let s3 = this.squares[combination[2]];
 
-            
+            // Ensure the combinaton is not three empty squares.
+            if (s1.actor != null) {
+                // check if the three squares has the same actor.
+                if (s1.actor == s2.actor && s1.actor == s3.actor) {
+                    // Set game over.
+                    this.gameOver = true;
 
+                    // Draw the combination line.
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(s1.x + s1.width/2, s1.y + s1.height/2);
+                    this.ctx.lineTo(s3.x + s3.width/2, s3.y + s3.height/2);
+                    this.ctx.stroke();
+
+                    // Draw winner text.
+                    this.ctx.fillStyles = 'red';
+                    this.ctx.font = '30px Arial';
+                    this.textAlign = "center";
+                    this.ctx.fillText(s1.actor + " wins!", this.canvas.width / 2, this.canvas.height / 2);
+                }
+            }
+        }
+
+        // Check if the game is draw.
+        if (!this.gameOver && this.squares.filter(square => square.actor == null).length == 0) {
+            this.gameOver = true;
+            this.ctx.fillStyles = 'red';
+            this.ctx.font = '30px Arial';
+            this.ctx.textAlign = "center";
+            this.ctx.fillText("Draw!", this.canvas.width / 2, this.canvas.height / 2);
         }
     }
 
