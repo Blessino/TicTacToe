@@ -66,10 +66,18 @@ class TicTacToe {
 
     }
 
-    // THe click method is called whenever the canvcas is clicked.
+    // The click method is called whenever the canvcas is clicked.
     // The method is used to check if the mouse clicked within one of the empty squares.
     click(event) {
+        // If the game has ended, reset the game.
+        if (this.gameOver) {
+            this.reset();
+            return;
+        }
 
+        // Get mouse position.
+        const x = event.offsetX;
+        const y = event.offsetY;
     }
 
     // The checkFoeWinner method ends the game if there is a winner or it's a draw.
