@@ -151,6 +151,18 @@ class TicTacToe {
 
     // The reset method restarts the game.
     reset() {
-
+        // Clear canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        // Reset all actors.
+        this.squares.forEach(squares => squares.actor = null);
+        // Draw the boared.
+        this.squares.forEach(square => this.squares.draw());
+        // Reset turn.
+        this.turn = 0;
+        // reset game over.
+        this.gameOver = false;
     }
 }
+
+// Create a new game.
+new TicTacToe('canvas');
