@@ -108,7 +108,18 @@ class TicTacToe {
         ];
 
         // Check combinations
-        for (let i = 0; i < winnerCombinations.length; i++)
+        for (let i = 0; i < winnerCombinations.length; i++) {
+            // Get combination
+            let combination = winnerCombinations[i];
+
+            // get squares
+            let s1 = this.squares[combination[0]];
+            let s2 = this.squares[combination[1]];
+            let s3 = this.squares[combination[2]];
+
+            
+
+        }
     }
 
     // The reset method restarts the game.
