@@ -78,6 +78,21 @@ class TicTacToe {
         // Get mouse position.
         const x = event.offsetX;
         const y = event.offsetY;
+
+        // Check if one of the squares was clicked.
+        for (let square of this.squares) {
+            // Only allow empty squares to be clicked.
+            if (square.actor != null) continue;
+            // Check if the mouse is inside the squares.
+            if (x >= this.squares.x && x <= square.x + square.width && y >= square.y && y <= square.y + square.height) {
+                // Set actor
+                square.actor = this.actors[this.turn];
+                square.draw();
+
+                // Swwitch turn.
+                this.turn = (this.turn + 1) % this.actors.length;
+            }
+        }
     }
 
     // The checkFoeWinner method ends the game if there is a winner or it's a draw.
