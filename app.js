@@ -156,6 +156,8 @@ class TicTacToe {
                     this.ctx.font = '30px Arial';
                     this.ctx.textAlign = "center";
                     this.ctx.fillText(s1.actor + " wins!", this.canvas.width / 2, this.canvas.height / 2);
+                    this.turnPlayer.innerHTML = `${s1.actor} wins!`;
+
                 }
             }
         }
@@ -167,6 +169,7 @@ class TicTacToe {
             this.ctx.font = '30px Arial';
             this.ctx.textAlign = "center";
             this.ctx.fillText("Draw!", this.canvas.width / 2, this.canvas.height / 2);
+            this.turnPlayer.innerHTML = ` Draw!`;
         }
     }
 
@@ -178,6 +181,7 @@ class TicTacToe {
         this.squares.forEach(squares => squares.actor = null);
         // Draw the boared.
         this.squares.forEach(squares => squares.draw());
+        this.turnPlayer.innerHTML = ` X turn!`;
         // Reset turn.
         this.turn = 0;
         // reset game over.
