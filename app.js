@@ -11,6 +11,7 @@ class Square {
         this.height =  height;
         this.ctx = ctx;
         this.actor = null;
+        
     }
 
     // The draw method is used to draw the square.
@@ -31,10 +32,12 @@ class Square {
 
 // The TIcTacToe class defines the actual game.
 class TicTacToe {
+    
     constructor(id) {
         // Get canvas and context.
         this.canvas = document.getElementById(id);
         this.ctx = this.canvas.getContext('2d');
+        this.turnPlayer = document.getElementById("turn");
 
         // Create an empty array to store the squares.
         this.squares = [];
@@ -52,6 +55,7 @@ class TicTacToe {
 
         // Create the actors.
         this.actors = ["X", "O"];
+        this.turnPlayer.innerHTML = "Start game X turn";
 
         // Define the current actors.
         this.turn = 0;
@@ -64,7 +68,7 @@ class TicTacToe {
 
         // Bind the click event.
         this.canvas.addEventListener('click', function(event) {this.click(event); }.bind(this));
-
+        
     }
 
     // The click method is called whenever the canvcas is clicked.
@@ -88,10 +92,23 @@ class TicTacToe {
             if (x >= square.x && x <= square.x + square.width && y >= square.y && y <= square.y + square.height) {
                 // Set actor
                 square.actor = this.actors[this.turn];
+                console.log(square.actor);
                 square.draw();
+                this.turnPlayer.innerHTML = "x turn";
+                // this.turnPlayer = square.actor === 0 ? square.actor === 1 : innerHTML = "x turn";
+                if (square.actor === this.actors[0] ){
+                    this.turnPlayer.innerHTML = "O turn";
+                    console.log("x turn");
+                } else if (square.actor === this.actors[1]) {
+                    
+                    this.turnPlayer.innerHTML = "X turn";
+                    console.log("o turn");
+                }
 
                 // Swwitch turn.
                 this.turn = (this.turn + 1) % this.actors.length;
+                
+               
             }
         }
 
