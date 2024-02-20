@@ -18,6 +18,24 @@ body {
     padding: 2rem 0;
 }
 
+#btn-start {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.9rem;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    
+}
+
+#btn-start:hover {
+    background-color: #4c4c4c;
+    color: white;
+    border: none ;
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+    
+}
+
 #turn {
     padding: 2rem 0;
     font-size: 1.4rem;

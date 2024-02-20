@@ -3,6 +3,9 @@
 // A square represents a square on the board.
 // It contains position, size information and,
 // optionally, an actor that should be drawn on it.
+
+
+
 class Square {
     constructor(x, y, width, height, ctx) {
         this.x = x;
@@ -11,7 +14,6 @@ class Square {
         this.height =  height;
         this.ctx = ctx;
         this.actor = null;
-        
     }
 
     // The draw method is used to draw the square.
@@ -37,8 +39,11 @@ class TicTacToe {
         // Get canvas and context.
         this.canvas = document.getElementById(id);
         this.ctx = this.canvas.getContext('2d');
+        //player name
+        this.start = new Start;
+        console.log(this.start.playerOne);
         this.turnPlayer = document.getElementById("turn");
-
+        
         // Create an empty array to store the squares.
         this.squares = [];
 
@@ -55,7 +60,7 @@ class TicTacToe {
 
         // Create the actors.
         this.actors = ["X", "O"];
-        this.turnPlayer.innerHTML = "Start game X turn";
+        this.turnPlayer.innerHTML = `Start game ${this.start.playerOne} turn Your X`;
 
         // Define the current actors.
         this.turn = 0;
@@ -94,21 +99,19 @@ class TicTacToe {
                 square.actor = this.actors[this.turn];
                 console.log(square.actor);
                 square.draw();
-                this.turnPlayer.innerHTML = "x turn";
-                // this.turnPlayer = square.actor === 0 ? square.actor === 1 : innerHTML = "x turn";
-                if (square.actor === this.actors[0] ){
-                    this.turnPlayer.innerHTML = "O turn";
+                //shows player name
+                this.turnPlayer.innerHTML = `${this.playerName} turn X`;
+                
+                if (square.actor === this.actors[0]   ){
+                    this.turnPlayer.innerHTML = ` ${this.playerTwo} turn O`;
                     console.log("x turn");
-                } else if (square.actor === this.actors[1]) {
-                    
-                    this.turnPlayer.innerHTML = "X turn";
+                } else if (square.actor === this.actors[1]  ) {
+                    this.turnPlayer.innerHTML = `${this.playerOne} turn X`;
                     console.log("o turn");
                 }
 
                 // Swwitch turn.
                 this.turn = (this.turn + 1) % this.actors.length;
-                
-               
             }
         }
 
@@ -156,8 +159,13 @@ class TicTacToe {
                     this.ctx.font = '30px Arial';
                     this.ctx.textAlign = "center";
                     this.ctx.fillText(s1.actor + " wins!", this.canvas.width / 2, this.canvas.height / 2);
-                    this.turnPlayer.innerHTML = `${s1.actor} wins!`;
 
+                    //show win by player name
+                    if (s1.actor == playerOne) {
+                        this.turnPlayer.innerHTML = `${playerOne}  wins!`;
+                    } else if (s1.actor == playerTwo){
+                        this.turnPlayer.innerHTML = `${playerTwo}  wins!`;
+                    }
                 }
             }
         }
@@ -169,7 +177,7 @@ class TicTacToe {
             this.ctx.font = '30px Arial';
             this.ctx.textAlign = "center";
             this.ctx.fillText("Draw!", this.canvas.width / 2, this.canvas.height / 2);
-            this.turnPlayer.innerHTML = "Draw!";
+            this.turnPlayer.innerHTML = "Game is Draw!";
         }
     }
 
@@ -181,7 +189,8 @@ class TicTacToe {
         this.squares.forEach(squares => squares.actor = null);
         // Draw the boared.
         this.squares.forEach(squares => squares.draw());
-        this.turnPlayer.innerHTML = "Start game X turn";
+        //player name
+        this.turnPlayer.innerHTML = `Start game ${Start.playerOne} turn your X`;
         // Reset turn.
         this.turn = 0;
         // reset game over.
@@ -189,5 +198,31 @@ class TicTacToe {
     }
 }
 
-// Create a new game.
-new TicTacToe('canvas');
+// creating start button
+class Start {
+    constructor (playerOne, playerTwo) {
+        this.startBtn = document.getElementById('btn-start');
+
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+        
+        this.startBtn.addEventListener('click', function() {this.getPlayer();}.bind(this));
+        
+    }
+    
+    getPlayer() {
+        //taking user input
+        this.playerOne = prompt("name");
+        alert(this.playerOne);
+        this.playerTwo = prompt("name");
+        alert(this.playerTwo);
+        //creating game
+        new TicTacToe('canvas');
+        // removing button
+        this.startBtn.remove();
+    };
+};
+
+//initializing 
+new Start();
+
