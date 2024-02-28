@@ -35,13 +35,30 @@ class Square {
 // The TIcTacToe class defines the actual game.
 class TicTacToe {
     
-    constructor(id) {
+    constructor(id,playerOne,playerTwo) {
         // Get canvas and context.
         this.canvas = document.getElementById(id);
         this.ctx = this.canvas.getContext('2d');
-        //player name
-        this.start = new Start;
-        console.log(this.start.playerOne);
+
+        //Getting the player name.
+        this.startBtn = document.getElementById('btn-start');
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+
+        // Bind the getplayer event.
+        this.startBtn.addEventListener('click', function() {
+
+        //taking user input
+        this.playerOne = prompt("name");
+        this.playerTwo = prompt("name");
+        this.turnPlayer.innerHTML = `Start game ${this.playerOne} turn Your X`;
+
+        // removing button
+        this.startBtn.remove();
+        // this.squares.forEach(squares => squares.draw());
+        }.bind(this));
+        
+        // Displaying the player name.
         this.turnPlayer = document.getElementById("turn");
         
         // Create an empty array to store the squares.
@@ -60,7 +77,7 @@ class TicTacToe {
 
         // Create the actors.
         this.actors = ["X", "O"];
-        this.turnPlayer.innerHTML = `Start game ${this.start.playerOne} turn Your X`;
+        
 
         // Define the current actors.
         this.turn = 0;
@@ -69,12 +86,24 @@ class TicTacToe {
         this.gameOver = false;
 
         // Draw the board.
-        this.squares.forEach(squares => squares.draw());
+        this.squares.forEach(squares => squares.draw()); 
+        if (this.playerOne != null && this.playerTwo != null) {
+
+        this.squares.forEach(squares => squares.draw()); 
+     } 
 
         // Bind the click event.
         this.canvas.addEventListener('click', function(event) {this.click(event); }.bind(this));
-        
-    }
+        }
+
+    // getPlayer() {
+    //     //taking user input
+    //     this.playerOne = prompt("name");
+    //     this.playerTwo = prompt("name");
+
+    //     // removing button
+    //     this.startBtn.remove();
+    // };
 
     // The click method is called whenever the canvcas is clicked.
     // The method is used to check if the mouse clicked within one of the empty squares.
@@ -92,6 +121,7 @@ class TicTacToe {
         // Check if one of the squares was clicked.
         for (let square of this.squares) {
             // Only allow empty squares to be clicked.
+            // if (this.playerOne != null && this.playerTwo != null) continue;
             if (square.actor != null) continue;
             // Check if the mouse is inside the squares.
             if (x >= square.x && x <= square.x + square.width && y >= square.y && y <= square.y + square.height) {
@@ -100,7 +130,7 @@ class TicTacToe {
                 console.log(square.actor);
                 square.draw();
                 //shows player name
-                this.turnPlayer.innerHTML = `${this.playerName} turn X`;
+                this.turnPlayer.innerHTML = `${this.playerOne} turn X`;
                 
                 if (square.actor === this.actors[0]   ){
                     this.turnPlayer.innerHTML = ` ${this.playerTwo} turn O`;
@@ -161,10 +191,10 @@ class TicTacToe {
                     this.ctx.fillText(s1.actor + " wins!", this.canvas.width / 2, this.canvas.height / 2);
 
                     //show win by player name
-                    if (s1.actor == playerOne) {
-                        this.turnPlayer.innerHTML = `${playerOne}  wins!`;
-                    } else if (s1.actor == playerTwo){
-                        this.turnPlayer.innerHTML = `${playerTwo}  wins!`;
+                    if (s1.actor == this.playerOne) {
+                        this.turnPlayer.innerHTML = `${this.playerOne}  wins!`;
+                    } else if (s1.actor == this.playerTwo){
+                        this.turnPlayer.innerHTML = `${this.playerTwo}  wins!`;
                     }
                 }
             }
@@ -190,7 +220,7 @@ class TicTacToe {
         // Draw the boared.
         this.squares.forEach(squares => squares.draw());
         //player name
-        this.turnPlayer.innerHTML = `Start game ${Start.playerOne} turn your X`;
+        this.turnPlayer.innerHTML = `Start game ${this.playerOne} turn your X`;
         // Reset turn.
         this.turn = 0;
         // reset game over.
@@ -199,30 +229,30 @@ class TicTacToe {
 }
 
 // creating start button
-class Start {
-    constructor (playerOne, playerTwo) {
-        this.startBtn = document.getElementById('btn-start');
+// class Start {
+//     constructor (playerOne, playerTwo) {
+//         this.startBtn = document.getElementById('btn-start');
 
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
+//         this.playerOne = playerOne;
+//         this.playerTwo = playerTwo;
         
-        this.startBtn.addEventListener('click', function() {this.getPlayer();}.bind(this));
+//         this.startBtn.addEventListener('click', function() {this.getPlayer();}.bind(this));
         
-    }
+//     }
     
-    getPlayer() {
-        //taking user input
-        this.playerOne = prompt("name");
-        alert(this.playerOne);
-        this.playerTwo = prompt("name");
-        alert(this.playerTwo);
-        //creating game
-        new TicTacToe('canvas');
-        // removing button
-        this.startBtn.remove();
-    };
-};
+//     getPlayer() {
+//         //taking user input
+//         this.playerOne = prompt("name");
+//         alert(this.playerOne);
+//         this.playerTwo = prompt("name");
+//         alert(this.playerTwo);
+//         //creating game
+//         new TicTacToe('canvas');
+//         // removing button
+//         this.startBtn.remove();
+//     };
+// };
 
 //initializing 
-new Start();
+new TicTacToe('canvas');
 
