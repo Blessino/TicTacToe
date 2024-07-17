@@ -57,7 +57,7 @@ class TicTacToe {
         this.startBtn.remove();
 
          
-         if (!this.playerOne === '' || !this.playerTwo === ''){
+         if (this.playerOne && this.playerTwo !== ''){
              // Draw the board.
              this.squares.forEach(squares => squares.draw());
              // Create the actors.
