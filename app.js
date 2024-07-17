@@ -56,12 +56,17 @@ class TicTacToe {
         // removing button
         this.startBtn.remove();
 
-         // Draw the board.
-         if (this.playerOne === '' && this.playerTwo === ''){
-            alert("Player Name Requird");
-            location.reload();
+         
+         if (!this.playerOne === '' || !this.playerTwo === ''){
+             // Draw the board.
+             this.squares.forEach(squares => squares.draw());
+             // Create the actors.
+             this.actors = ["X", "O"];
          } else {
-            this.squares.forEach(squares => squares.draw());
+            // alert message
+            alert("Player Name Requird");
+            // reloads to start buttons
+            location.reload();
          }
         
         }.bind(this));
@@ -82,11 +87,7 @@ class TicTacToe {
                 this.squares.push(new Square(x * w, y * h, w, h, this.ctx));
             }
         }
-
-        // Create the actors.
-        this.actors = ["X", "O"];
         
-
         // Define the current actors.
         this.turn = 0;
 
